@@ -1,0 +1,22 @@
+{
+  "name": "ninjafood",
+  "version": "1.0.0",
+  "description": "Practice projects from [Shaun](https://github.com/iamshaunjp)'s awesome developer tutorials.",
+  "main": "index.js",
+  "scripts": {
+    "build-css": "tailwindcss build src/styles.css -o public/styles.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vr1e/code-ninjas.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vr1e/code-ninjas/issues"
+  },
+  "homepage": "https://github.com/vr1e/code-ninjas#readme",
+  "devDependencies": {
+    "tailwindcss": "^1.9.0"
+  }
+}
