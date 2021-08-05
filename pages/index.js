@@ -14,7 +14,7 @@ export async function getStaticProps() {
 			recipes: res.items,
 		},
 	};
-}
+};
 
 export default function Recipes({ recipes }) {
 	console.log(recipes);
@@ -23,6 +23,13 @@ export default function Recipes({ recipes }) {
 			{recipes.map(recipe => (
 				<RecipeCard key={recipe.sys.id} recipe={recipe} />
 			))}
+			<style jsx>{`
+				.recipe-list {
+					display: grid;
+					grid-template-columns: 1fr 1fr;
+					gap: 20px 60px;
+				}
+			`}</style>
 		</div>
 	);
 }
