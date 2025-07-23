@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:rpg/models/character.dart';
 import 'package:rpg/models/vocation.dart';
 import 'package:rpg/screens/create/vocation_card.dart';
 import 'package:rpg/screens/home/home.dart';
+import 'package:rpg/services/character_strore.dart';
 import 'package:rpg/shared/styled_button.dart';
 import 'package:rpg/shared/styled_text.dart';
 import 'package:rpg/theme.dart';
@@ -11,14 +13,14 @@ import 'package:uuid/uuid.dart';
 
 var uuid = const Uuid();
 
-class Create extends StatefulWidget {
-  const Create({super.key});
+class CreateScreen extends StatefulWidget {
+  const CreateScreen({super.key});
 
   @override
-  State<Create> createState() => _CreateState();
+  State<CreateScreen> createState() => _CreateScreenState();
 }
 
-class _CreateState extends State<Create> {
+class _CreateScreenState extends State<CreateScreen> {
   final _nameController = TextEditingController();
   final _sloganController = TextEditingController();
 
@@ -89,7 +91,7 @@ class _CreateState extends State<Create> {
       return;
     }
 
-    characters.add(
+    Provider.of<CharacterStrore>(context, listen: false).addCharacter(
       Character(
         id: uuid.v4(),
         name: _nameController.text.trim(),
