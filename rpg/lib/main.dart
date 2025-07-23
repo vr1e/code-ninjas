@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:rpg/screens/create/create.dart';
 import 'package:rpg/screens/home/home.dart';
 import 'package:rpg/theme.dart';
 
 void main() {
-  runApp(MaterialApp(theme: primaryTheme, home: const Create()));
+  runApp(MaterialApp(theme: primaryTheme, home: const Home()));
 }
 
 class Sandbox extends StatelessWidget {
