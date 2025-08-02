@@ -1,7 +1,12 @@
 import { Stack } from "expo-router";
+import GuestOnly from "../../components/auth/GuestOnly";
 
 const AuthLayout = () => {
-	return <Stack screenOptions={{ headerShown: false, animation: "none" }} />;
+	return (
+		<GuestOnly>
+			<Stack screenOptions={{ headerShown: false, animation: "none" }} />
+		</GuestOnly>
+	);
 };
 
 export default AuthLayout;

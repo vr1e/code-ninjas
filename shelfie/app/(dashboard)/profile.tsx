@@ -3,17 +3,25 @@ import React from "react";
 import ThemedView from "../../components/ThemedView";
 import ThemedText from "../../components/ThemedText";
 import Spacer from "../../components/Spacer";
+import { useUser } from "../../hooks/useUser";
+import ThemedButton from "../../components/ThemedButton";
 
 const Profile = () => {
+	const { logout, user } = useUser();
+
 	return (
 		<ThemedView styles={styles.container}>
 			<ThemedText title={true} styles={styles.heading}>
-				Your Email
+				{user?.email}
 			</ThemedText>
 			<Spacer />
 
 			<ThemedText>Time to start reading some books...</ThemedText>
 			<Spacer />
+
+			<ThemedButton onPress={logout}>
+				<ThemedText>Logout</ThemedText>
+			</ThemedButton>
 		</ThemedView>
 	);
 };
