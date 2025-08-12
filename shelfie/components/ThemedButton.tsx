@@ -16,7 +16,7 @@ type ThemedButtonProps = PressableProps & {
 const ThemedButton = ({ styles, ...props }: ThemedButtonProps) => {
 	return (
 		<Pressable
-			style={({ pressed }) => [style.btn, pressed && style.pressed]}
+			style={({ pressed }) => [style.btn, pressed && style.pressed, styles]}
 			{...props}
 		/>
 	);
