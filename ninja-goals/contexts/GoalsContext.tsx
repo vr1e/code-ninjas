@@ -1,22 +1,34 @@
-import { createContext, useState, ReactNode, useContext } from "react";
+import { createContext, useState, ReactNode, useEffect } from "react";
 import type { Goal, GoalsContextType } from "../types";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 
 export const GoalsContext = createContext<GoalsContextType | null>(null);
+const COLLECTION_NAME = "goals";
 
 export function GoalsProvider({ children }: { children: ReactNode }) {
 	const [goals, setGoals] = useState<Goal[]>([]);
 
-	async function fetchGoals() {}
+	async function fetchGoals() {
+		const snapshot = await getDocs(collection(db, COLLECTION_NAME));
+		const documents = snapshot.docs.map(doc => ({
+			...(doc.data() as Omit<Goal, "id">),
+			id: doc.id,
+		})) as Goal[];
+		setGoals(documents);
+	}
 
-	async function createGoal(goal: Goal) {
-		await addDoc(collection(db, "goals"), goal);
+	async function createGoal(goal: Omit<Goal, "id">) {
+		await addDoc(collection(db, COLLECTION_NAME), goal);
 	}
 
 	async function deleteGoal() {}
 
 	async function updateGoal() {}
+
+	useEffect(() => {
+		fetchGoals();
+	}, []);
 
 	return (
 		<GoalsContext.Provider
