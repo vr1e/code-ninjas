@@ -10,10 +10,15 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useGoals } from "../../hooks/useGoals";
 import { useState } from "react";
 import { Goal } from "../../types";
+import Slider from "@react-native-community/slider";
 
 const Goals = () => {
 	const { goals } = useGoals();
 	const [selected, setSelected] = useState<Goal | null>(null);
+
+	const handleProgressChange = async (value: number) => {
+		console.log(value);
+	};
 
 	return (
 		<SafeAreaView style={styles.container}>
@@ -36,6 +41,17 @@ const Goals = () => {
 					<View style={styles.modal}>
 						<Text style={styles.title}>{selected.goal}</Text>
 						<Text>Adjust the progress of this goal:</Text>
+
+						<Slider
+							style={{ width: "80%", height: 40, marginVertical: 20 }}
+							value={selected.progress}
+							minimumValue={0}
+							maximumValue={100}
+							minimumTrackTintColor='#21cc8d'
+							maximumTrackTintColor='#ddd'
+							thumbTintColor='#21cc8d'
+							onSlidingComplete={handleProgressChange}
+						/>
 
 						<View style={styles.buttonsWrapper}>
 							<Pressable style={styles.btn} onPress={() => setSelected(null)}>
