@@ -13,11 +13,11 @@ import { Goal } from "../../types";
 import Slider from "@react-native-community/slider";
 
 const Goals = () => {
-	const { goals } = useGoals();
+	const { goals, updateGoal } = useGoals();
 	const [selected, setSelected] = useState<Goal | null>(null);
 
 	const handleProgressChange = async (value: number) => {
-		console.log(value);
+		await updateGoal(selected!.id, { progress: value });
 	};
 
 	return (

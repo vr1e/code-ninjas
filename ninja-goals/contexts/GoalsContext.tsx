@@ -1,6 +1,13 @@
 import { createContext, useState, ReactNode, useEffect } from "react";
 import type { Goal, GoalsContextType } from "../types";
-import { addDoc, collection, getDocs, onSnapshot } from "firebase/firestore";
+import {
+	addDoc,
+	collection,
+	doc,
+	getDocs,
+	onSnapshot,
+	updateDoc,
+} from "firebase/firestore";
 import { db } from "../firebaseConfig";
 
 export const GoalsContext = createContext<GoalsContextType | null>(null);
@@ -24,7 +31,12 @@ export function GoalsProvider({ children }: { children: ReactNode }) {
 
 	async function deleteGoal() {}
 
-	async function updateGoal() {}
+	async function updateGoal(
+		id: Goal["id"],
+		updates: Partial<Omit<Goal, "id">>
+	) {
+		await updateDoc(doc(db, COLLECTION_NAME, id), updates);
+	}
 
 	useEffect(() => {
 		const unsubscribe = onSnapshot(

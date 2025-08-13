@@ -10,5 +10,8 @@ export type GoalsContextType = {
 	fetchGoals: () => Promise<void>;
 	createGoal: (goal: Omit<Goal, "id">) => Promise<void>;
 	deleteGoal: () => Promise<void>;
-	updateGoal: () => Promise<void>;
+	updateGoal: (
+		id: Goal["id"],
+		updates: Partial<Omit<Goal, "id">>
+	) => Promise<void>;
 };
