@@ -3,6 +3,7 @@ import type { Goal, GoalsContextType } from "../types";
 import {
 	addDoc,
 	collection,
+	deleteDoc,
 	doc,
 	getDocs,
 	onSnapshot,
@@ -29,7 +30,9 @@ export function GoalsProvider({ children }: { children: ReactNode }) {
 		await addDoc(collection(db, COLLECTION_NAME), goal);
 	}
 
-	async function deleteGoal() {}
+	async function deleteGoal(id: Goal["id"]) {
+		await deleteDoc(doc(db, COLLECTION_NAME, id));
+	}
 
 	async function updateGoal(
 		id: Goal["id"],

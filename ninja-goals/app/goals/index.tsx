@@ -13,11 +13,16 @@ import { Goal } from "../../types";
 import Slider from "@react-native-community/slider";
 
 const Goals = () => {
-	const { goals, updateGoal } = useGoals();
+	const { goals, updateGoal, deleteGoal } = useGoals();
 	const [selected, setSelected] = useState<Goal | null>(null);
 
 	const handleProgressChange = async (value: number) => {
 		await updateGoal(selected!.id, { progress: value });
+	};
+
+	const handleDelete = async () => {
+		await deleteGoal(selected!.id);
+		setSelected(null);
 	};
 
 	return (
@@ -56,6 +61,11 @@ const Goals = () => {
 						<View style={styles.buttonsWrapper}>
 							<Pressable style={styles.btn} onPress={() => setSelected(null)}>
 								<Text style={{ color: "white" }}>Close</Text>
+							</Pressable>
+							<Pressable
+								style={[styles.btn, { backgroundColor: "red" }]}
+								onPress={() => handleDelete()}>
+								<Text style={{ color: "white" }}>Delete Goals</Text>
 							</Pressable>
 						</View>
 					</View>
