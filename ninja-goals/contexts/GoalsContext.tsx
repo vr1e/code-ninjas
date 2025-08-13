@@ -50,6 +50,10 @@ export function GoalsProvider({ children }: { children: ReactNode }) {
 					id: doc.id,
 				})) as Goal[];
 				setGoals(documents);
+			},
+			error => {
+				console.error("Error listening to goals collection:", error);
+				// Optionally set an error state or show user notification
 			}
 		);
 
